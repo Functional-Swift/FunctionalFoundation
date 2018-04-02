@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		CE2D31FB20721ADB00C12E29 /* FunctionalFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2D31F120721ADB00C12E29 /* FunctionalFoundation.framework */; };
-		CE2D320020721ADB00C12E29 /* FunctionalFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D31FF20721ADB00C12E29 /* FunctionalFoundationTests.swift */; };
+		CE2D320020721ADB00C12E29 /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D31FF20721ADB00C12E29 /* ObservableTests.swift */; };
 		CE2D320220721ADB00C12E29 /* FunctionalFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = CE2D31F420721ADB00C12E29 /* FunctionalFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE2D321B20721C2E00C12E29 /* FunctionalFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2D321220721C2D00C12E29 /* FunctionalFoundation.framework */; };
 		CE2D322920721C9C00C12E29 /* FunctionalFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = CE2D31F420721ADB00C12E29 /* FunctionalFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE2D325220721DD500C12E29 /* FunctionalFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2D324920721DD500C12E29 /* FunctionalFoundation.framework */; };
 		CE2D326020721E1000C12E29 /* FunctionalFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = CE2D31F420721ADB00C12E29 /* FunctionalFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE2D326120721E1000C12E29 /* FunctionalFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = CE2D31F420721ADB00C12E29 /* FunctionalFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CE825D6020721EAD00D40EC9 /* FunctionalFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D31FF20721ADB00C12E29 /* FunctionalFoundationTests.swift */; };
-		CE825D6120721EB000D40EC9 /* FunctionalFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D31FF20721ADB00C12E29 /* FunctionalFoundationTests.swift */; };
+		CE825D6020721EAD00D40EC9 /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D31FF20721ADB00C12E29 /* ObservableTests.swift */; };
+		CE825D6120721EB000D40EC9 /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2D31FF20721ADB00C12E29 /* ObservableTests.swift */; };
 		CE825D6C2072206300D40EC9 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE825D672072206300D40EC9 /* Observable.swift */; };
 		CE825D6D2072206300D40EC9 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE825D672072206300D40EC9 /* Observable.swift */; };
 		CE825D6E2072206300D40EC9 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE825D672072206300D40EC9 /* Observable.swift */; };
@@ -29,6 +29,9 @@
 		CE825D752072206300D40EC9 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE825D6B2072206300D40EC9 /* Future.swift */; };
 		CE825D762072206300D40EC9 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE825D6B2072206300D40EC9 /* Future.swift */; };
 		CE825D772072206300D40EC9 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE825D6B2072206300D40EC9 /* Future.swift */; };
+		CEDFE00F20723FFB00C0F011 /* ObservableThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFE00E20723FFB00C0F011 /* ObservableThreadSafetyTests.swift */; };
+		CEDFE01020723FFB00C0F011 /* ObservableThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFE00E20723FFB00C0F011 /* ObservableThreadSafetyTests.swift */; };
+		CEDFE01120723FFB00C0F011 /* ObservableThreadSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFE00E20723FFB00C0F011 /* ObservableThreadSafetyTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +63,7 @@
 		CE2D31F420721ADB00C12E29 /* FunctionalFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FunctionalFoundation.h; sourceTree = "<group>"; };
 		CE2D31F520721ADB00C12E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE2D31FA20721ADB00C12E29 /* FunctionalFoundation iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FunctionalFoundation iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE2D31FF20721ADB00C12E29 /* FunctionalFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionalFoundationTests.swift; sourceTree = "<group>"; };
+		CE2D31FF20721ADB00C12E29 /* ObservableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableTests.swift; sourceTree = "<group>"; };
 		CE2D320120721ADB00C12E29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE2D321220721C2D00C12E29 /* FunctionalFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FunctionalFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2D321520721C2D00C12E29 /* tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tvOS-Info.plist"; sourceTree = "<group>"; };
@@ -76,6 +79,7 @@
 		CEDFE00B207225EA00C0F011 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		CEDFE00C207225EB00C0F011 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CEDFE00D207225EB00C0F011 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CEDFE00E20723FFB00C0F011 /* ObservableThreadSafetyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableThreadSafetyTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,7 +176,7 @@
 		CE2D31FE20721ADB00C12E29 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				CE2D31FF20721ADB00C12E29 /* FunctionalFoundationTests.swift */,
+				CEDFE0122072403D00C0F011 /* Observable */,
 				CE2D320B20721AFF00C12E29 /* Support */,
 			);
 			path = Tests;
@@ -230,6 +234,15 @@
 				CEDFE00D207225EB00C0F011 /* README.md */,
 			);
 			name = Deployment;
+			sourceTree = "<group>";
+		};
+		CEDFE0122072403D00C0F011 /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				CE2D31FF20721ADB00C12E29 /* ObservableTests.swift */,
+				CEDFE00E20723FFB00C0F011 /* ObservableThreadSafetyTests.swift */,
+			);
+			path = Observable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -519,7 +532,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE2D320020721ADB00C12E29 /* FunctionalFoundationTests.swift in Sources */,
+				CEDFE00F20723FFB00C0F011 /* ObservableThreadSafetyTests.swift in Sources */,
+				CE2D320020721ADB00C12E29 /* ObservableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,7 +551,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE825D6020721EAD00D40EC9 /* FunctionalFoundationTests.swift in Sources */,
+				CEDFE01020723FFB00C0F011 /* ObservableThreadSafetyTests.swift in Sources */,
+				CE825D6020721EAD00D40EC9 /* ObservableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,7 +580,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE825D6120721EB000D40EC9 /* FunctionalFoundationTests.swift in Sources */,
+				CEDFE01120723FFB00C0F011 /* ObservableThreadSafetyTests.swift in Sources */,
+				CE825D6120721EB000D40EC9 /* ObservableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
