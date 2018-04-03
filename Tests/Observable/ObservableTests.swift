@@ -60,22 +60,4 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(sut.value, 10)
     }
     
-    
-    func testSubscribeToConditionValue_ShouldCallsAndOnlyForCondition() {
-        let sut = Observable(0)
-        let expectedCallsCount = 100
-        var callsCount = 0
-        
-        let _ = sut.subscribe(to: 7) { (v) in
-            XCTAssertEqual(v, 7)
-        }
-        
-        (1...expectedCallsCount).forEach({ (index) in
-            sut.value = index
-            callsCount += 1
-        })
-        
-        XCTAssertEqual(expectedCallsCount, callsCount)
-    }
-    
 }

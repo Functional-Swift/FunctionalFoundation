@@ -27,7 +27,7 @@ import Foundation
 
 public typealias CancelSubscription = () -> (Void)
 
-public final class Observable<T: Comparable> {
+public final class Observable<T> {
     
     /// Subscribe to value changes
     ///
@@ -36,15 +36,6 @@ public final class Observable<T: Comparable> {
     @discardableResult
     public func subscribe(callback: @escaping (T) -> Void) -> CancelSubscription {
         let observer = Observer(handler: callback)
-        lock.async {
-            self.observers.add(observer)
-        }
-        return { [weak self] in self?.removeObserver(observer: observer) }
-    }
-    
-    public func subscribe(to conditionValue: T,callback: @escaping (T) -> Void) -> CancelSubscription {
-        let observer = Observer(handler: callback)
-        observer.conditionValue = conditionValue
         lock.async {
             self.observers.add(observer)
         }
@@ -67,14 +58,7 @@ public final class Observable<T: Comparable> {
             }
             
             for observer in observers {
-                
-                if let conditionValue = observer.conditionValue, newValue == conditionValue {
-                    observer.handler(newValue)
-                }
-                
-                if observer.conditionValue == nil {
-                    observer.handler(newValue)
-                }
+                observer.handler(newValue)
             }
         }
         
@@ -89,7 +73,6 @@ public final class Observable<T: Comparable> {
     
     private final class Observer {
         let handler: Handler
-        var conditionValue: T?
         init(handler: @escaping Handler) {
             self.handler = handler
         }
