@@ -44,7 +44,7 @@ public final class Observable<T> {
     
     /// Value
     private var _value: T
-    var value: T {
+    public var value: T {
         get {
             return lock.sync {
                 return self._value
