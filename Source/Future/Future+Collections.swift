@@ -37,7 +37,7 @@ extension Sequence where Iterator.Element: FutureType {
 
     var allCompleted: Future<[Value]> {
         return Future<[Value]> { resolve in
-            let queue = DispatchQueue(label: "whenAll<Future<T>> -> Future<[T]> private queue (FunctionalFoundation)")
+            let queue = DispatchQueue(label: "[Future<T>] -> Future<[T]> private queue (FunctionalFoundation)")
             var result = [Value]()
             let group = DispatchGroup()
             for future in self {
