@@ -46,7 +46,7 @@ class FutureTests: XCTestCase {
     let delay: Double = 2 // 2 sec
     func future2sDelay() -> Future<Void> {
         return Future<Void> { resolve in
-            DispatchQueue.main.asyncAfter(deadline: .now() + FutureTests.delay) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 resolve(())
             }
         }

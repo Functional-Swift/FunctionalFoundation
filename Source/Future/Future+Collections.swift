@@ -27,15 +27,15 @@ import Foundation
 
 
 extension Sequence where Iterator.Element: FutureType {
-    typealias Value = Iterator.Element.Value
+    public typealias Value = Iterator.Element.Value
 
-    func onAllComplete(execute: @escaping ([Value]) -> ()) {
+    public func onAllComplete(execute: @escaping ([Value]) -> ()) {
         allCompleted.onComplete { values in
             execute(values)
         }
     }
 
-    var allCompleted: Future<[Value]> {
+    public var allCompleted: Future<[Value]> {
         return Future<[Value]> { resolve in
             let queue = DispatchQueue(label: "[Future<T>] -> Future<[T]> private queue (FunctionalFoundation)")
             var result = [Value]()
@@ -57,4 +57,3 @@ extension Sequence where Iterator.Element: FutureType {
         }
     }
 }
-
