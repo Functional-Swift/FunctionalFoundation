@@ -25,8 +25,16 @@
 
 import Foundation
 
-public final class Future<T> {
-    
+public protocol FutureType {
+    associatedtype Value
+    func onComplete(execute: @escaping (Value) -> ())
+    init(_ value: Value)
+    init(task: (@escaping (Value) -> ()) -> ())
+}
+
+public final class Future<T>: FutureType {
+    public typealias Value = T
+
     private let queue = DispatchQueue(label: "Future<T> private queue (FunctionalFoundation)")
     
     private var value: T?
@@ -57,16 +65,16 @@ public final class Future<T> {
     }
 }
 
-extension Future {
-    func map<U>(_ transform: @escaping (T) -> U) -> Future<U> {
+extension FutureType {
+    func map<U>(_ transform: @escaping (Value) -> U) -> Future<U> {
         return Future<U> { complete in
             self.onComplete { t in complete(transform(t)) }
         }
     }
 }
 
-extension Future {
-    public func then<U>(_ execute: @escaping (T) -> Future<U>) -> Future<U> {
+extension FutureType {
+    public func then<U>(_ execute: @escaping (Value) -> Future<U>) -> Future<U> {
         return Future<U> { complete in
             self.onComplete { value in
                 execute(value).onComplete(execute: complete)
@@ -75,11 +83,11 @@ extension Future {
     }
 }
 
-extension Future {
-    public func and<U>(_ future: Future<U>) -> Future<(T, U)> {
-        return Future<(T, U)> { complete in
-            self.onComplete { (value: T) in
-                future.onComplete { (anotherValue: U) in
+extension FutureType {
+    public func and<NewValue>(_ future: Future<NewValue>) -> Future<(Value, NewValue)> {
+        return Future<(Value, NewValue)> { complete in
+            self.onComplete { (value: Value) in
+                future.onComplete { (anotherValue: NewValue) in
                     complete((value, anotherValue))
                 }
             }
