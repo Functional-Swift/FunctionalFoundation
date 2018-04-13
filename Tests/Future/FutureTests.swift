@@ -16,7 +16,7 @@ class FutureTests: XCTestCase {
         let exp = expectation(description: "resolved future")
         let sut = future2sDelay()
         sut.onComplete { exp.fulfill() }
-        wait(for: [exp], timeout: FutureTests.delay + 0.1)
+        wait(for: [exp], timeout: delay + 0.1)
     }
 
     func testFuture_F1_thenF2_BothWithSameDelayBeforeResolving_shouldCallOnCompleteAfterDelayX2() {
@@ -25,7 +25,7 @@ class FutureTests: XCTestCase {
         sut.onComplete {
             exp.fulfill()
         }
-        wait(for: [exp], timeout: FutureTests.delay * 2 + 0.1)
+        wait(for: [exp], timeout: delay * 2 + 0.1)
     }
 
 
@@ -38,12 +38,12 @@ class FutureTests: XCTestCase {
         sut.onComplete { _, _ in
             exp.fulfill()
         }
-        wait(for: [exp], timeout: FutureTests.delay + 0.1)
+        wait(for: [exp], timeout: delay + 0.1)
     }
 
     // MARK: - Utils
 
-    static let delay: Double = 2 // 2 sec
+    let delay: Double = 2 // 2 sec
     func future2sDelay() -> Future<Void> {
         return Future<Void> { resolve in
             DispatchQueue.main.asyncAfter(deadline: .now() + FutureTests.delay) {

@@ -20,16 +20,16 @@ class FutureCollectionsTests: XCTestCase {
             if values.count == count { exp.fulfill() }
         }
 
-        wait(for: [exp], timeout: FutureTests.delay + 0.1)
+        wait(for: [exp], timeout: delay + 0.1)
     }
 
 
     // MARK: - Utils
 
-    static let delay: Double = 1 // 1 sec
+    let delay: Double = 1 // 1 sec
     func future2sDelay(_ v: Int) -> Future<Int> {
         return Future<Int> { resolve in
-            DispatchQueue.main.asyncAfter(deadline: .now() + FutureTests.delay) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 resolve(v)
             }
         }
