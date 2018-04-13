@@ -13,10 +13,11 @@ class FutureCollectionsTests: XCTestCase {
 
     func testCollectionOfFuture_AllWithSameDelayBeforeResolving_shouldCallOnCompleteAfterDelay() {
         let exp = expectation(description: "resolved future")
-        let sut = [0,0] // array of voids
+        let count = 100
+        let sut = [Int].init(repeating: 1, count: count)
 
-        sut.map(future2sDelay).allCompleted.onComplete { values in
-            if values.count == 2 { exp.fulfill() }
+        sut.map(future2sDelay).onAllComplete { values in
+            if values.count == count { exp.fulfill() }
         }
 
         wait(for: [exp], timeout: FutureTests.delay + 0.1)
@@ -25,7 +26,7 @@ class FutureCollectionsTests: XCTestCase {
 
     // MARK: - Utils
 
-    static let delay: Double = 2 // 2 sec
+    static let delay: Double = 1 // 1 sec
     func future2sDelay(_ v: Int) -> Future<Int> {
         return Future<Int> { resolve in
             DispatchQueue.main.asyncAfter(deadline: .now() + FutureTests.delay) {
@@ -33,6 +34,7 @@ class FutureCollectionsTests: XCTestCase {
             }
         }
     }
+    
 
 
    

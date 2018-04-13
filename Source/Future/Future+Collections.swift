@@ -12,6 +12,12 @@ import Foundation
 extension Sequence where Iterator.Element: FutureType {
     typealias Value = Iterator.Element.Value
 
+    func onAllComplete(execute: @escaping ([Value]) -> ()) {
+        allCompleted.onComplete { values in
+            execute(values)
+        }
+    }
+
     var allCompleted: Future<[Value]> {
         return Future<[Value]> { resolve in
             let queue = DispatchQueue(label: "whenAll<Future<T>> -> Future<[T]> private queue (FunctionalFoundation)")
