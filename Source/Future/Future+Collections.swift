@@ -6,7 +6,7 @@
 //  Copyright © 2018 Functional Swift. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 
 extension Sequence where Iterator.Element: FutureType {
