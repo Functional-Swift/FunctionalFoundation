@@ -11,26 +11,25 @@ import XCTest
 
 class FutureCollectionsTests: XCTestCase {
 
-    func testCollectionOfFuture_AllWithSameDelayBeforeResolving_shouldCallOnCompleteAfterDelayX2() {
+    func testCollectionOfFuture_AllWithSameDelayBeforeResolving_shouldCallOnCompleteAfterDelay() {
         let exp = expectation(description: "resolved future")
-        let values = [(),()] // array of voids
+        let sut = [0,0] // array of voids
 
-        let sut = [future2sDelay(),future2sDelay()]
+        sut.map(future2sDelay).allCompleted.onComplete { values in
+            if values.count == 2 { exp.fulfill() }
+        }
 
-
-        let s = Future.whenAll(sut)
-
-//        if values.count == 2 { exp.fulfill() }
-        wait(for: [exp], timeout: FutureTests.delay * 2 + 0.1)
+        wait(for: [exp], timeout: FutureTests.delay + 0.1)
     }
+
 
     // MARK: - Utils
 
     static let delay: Double = 2 // 2 sec
-    func future2sDelay() -> Future<Void> {
-        return Future<Void> { resolve in
+    func future2sDelay(_ v: Int) -> Future<Int> {
+        return Future<Int> { resolve in
             DispatchQueue.main.asyncAfter(deadline: .now() + FutureTests.delay) {
-                resolve(())
+                resolve(v)
             }
         }
     }

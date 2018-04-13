@@ -10,32 +10,28 @@ import Foundation
 
 
 extension Sequence where Iterator.Element: FutureType {
-    var allCompleted: Future<[Iterator.Element.ValueType]> {
-        return Future(value: [Iterator.Element.ValueType]())
-    }
-}
+    typealias Value = Iterator.Element.Value
 
-extension Future {
-    public static func whenAll<T>(_ futures: [Future<T>]) -> Future<[T]> {
-        
-        return Future<[T]> { resolve in
+    var allCompleted: Future<[Value]> {
+        return Future<[Value]> { resolve in
             let queue = DispatchQueue(label: "whenAll<Future<T>> -> Future<[T]> private queue (FunctionalFoundation)")
-            var result = [T]()
+            var result = [Value]()
             let group = DispatchGroup()
-            for future in futures {
+            for future in self {
                 group.enter()
-                future.onComplete {
-                    result.append($0)
-                    group.leave()
-                    
+                future.onComplete { v in
+                    queue.async {
+                        result.append(v)
+                        group.leave()
+                    }
                 }
             }
-            
+
             group.notify(queue: queue) {
                 resolve(result)
             }
-            
+
         }
     }
-    
 }
+
