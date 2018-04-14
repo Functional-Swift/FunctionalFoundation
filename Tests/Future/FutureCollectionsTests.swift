@@ -20,12 +20,14 @@ class FutureCollectionsTests: XCTestCase {
             if values.count == count { exp.fulfill() }
         }
 
-        wait(for: [exp], timeout: delay + 0.1)
+        wait(for: [exp], timeout: delay + maxDeviation)
     }
 
 
     // MARK: - Utils
-
+    
+    
+    let maxDeviation: Double = 0.15
     let delay: Double = 1 // 1 sec
     func future2sDelay(_ v: Int) -> Future<Int> {
         return Future<Int> { resolve in
