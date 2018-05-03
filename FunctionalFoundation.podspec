@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
   s.name = 'FunctionalFoundation'
-  s.version = '0.1.2'
+  s.version = '0.1.3'
   s.swift_version = '4.1'
   s.license = 'MIT'
   s.summary = 'Future, Command and Observable classes'
-  s.homepage = 'https://github.com/Functional-Swift/FunctionalFoundation'
+  s.homepage = 'https://github.com/MissingSwift/FunctionalFoundation'
   s.authors = { 'Maxim Bazarov' => 'bazaroffma@gmail.com.org' }
-  s.source = { :git => 'https://github.com/Functional-Swift/FunctionalFoundation.git', :tag => s.version }
+  s.source = { :git => 'https://github.com/MissingSwift/FunctionalFoundation.git', :tag => s.version }
 
   s.ios.deployment_target = '9.0'
   s.osx.deployment_target = '10.10'
