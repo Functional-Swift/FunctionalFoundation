@@ -39,6 +39,7 @@ public final class Observable<T> {
         lock.async {
             self.observers.add(observer)
         }
+        observer.handler(value)
         return { [weak self] in self?.removeObserver(observer: observer) }
     }
     

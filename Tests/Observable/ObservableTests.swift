@@ -14,7 +14,7 @@ class ObservableTests: XCTestCase {
     func testAdd10ObserversAndChangeValue_ShouldBe10Values() {
         let count = 10
         let sut = Observable("sut")
-        
+        let testValue = "test"
         var result = [String]()
         var unsubscribeTable = [Int: CancelSubscription]()
         (1...count).forEach({ (index) in
@@ -24,9 +24,9 @@ class ObservableTests: XCTestCase {
             unsubscribeTable[index] = unsubscribe
         })
         
-        sut.value = "test"
-        
-        XCTAssertEqual(result.count, count)
+        sut.value = testValue
+        // x2 because one for each change and one for value when subscribe
+        XCTAssertEqual(result.count, count*2)
     }
     
     func testAdd10ObserversAndChangeValue10Times_ShouldBe100Values() {
@@ -44,8 +44,8 @@ class ObservableTests: XCTestCase {
             sut.value = "\(index)"
         })
         
-        
-        XCTAssertEqual(result.count, 100)
+        // +10 for subscribe
+        XCTAssertEqual(result.count, 110)
     }
     
     func testChangeValue_ObservableValueShouldBeEqualNewValue() {

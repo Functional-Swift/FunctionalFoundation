@@ -47,7 +47,7 @@ class ObservableThreadSafetyTests: XCTestCase {
                 result.append(v)
             }
         }
-        
+        expected.append(0) // first value when subscribe
         DispatchQueue.concurrentPerform(iterations: 1000) { iteration in
             lock.sync {
                 sut.value = iteration
