@@ -25,23 +25,34 @@
 
 import Foundation
 
+
+private let futurePrivateQueueName = "Future<T> private queue (FunctionalFoundation)"
+
 public protocol FutureType {
     associatedtype Value
+    func onComplete(on queue: DispatchQueue?, execute: @escaping (Value) -> ())
     func onComplete(execute: @escaping (Value) -> ())
     init(_ value: Value)
     init(task: (@escaping (Value) -> ()) -> ())
+    init(on queue: DispatchQueue, _ value: Value)
+    init(on queue: DispatchQueue, task: (@escaping (Value) -> ()) -> ())
 }
 
 public final class Future<T>: FutureType {
     public typealias Value = T
 
-    private let queue = DispatchQueue(label: "Future<T> private queue (FunctionalFoundation)")
+    private var queue : DispatchQueue
     
     private var value: T?
     private var callbacks: [(T) -> ()] = []
+
+    public func onComplete(execute: @escaping (Value) -> ()) {
+        self.onComplete(on: nil, execute: execute)
+    }
     
-    public func onComplete(execute: @escaping (T) -> ()) {
-        queue.async {
+    public func onComplete(on queue: DispatchQueue? = nil, execute: @escaping (T) -> ()) {
+        let dispatchQueue = queue ?? self.queue
+        dispatchQueue.async {
             if let value = self.value {
                 execute(value)
             } else {
@@ -50,11 +61,15 @@ public final class Future<T>: FutureType {
         }
     }
     
+
+    
     public init(_ value: T) {
+        self.queue = DispatchQueue(label: futurePrivateQueueName)
         self.value = value
     }
     
     public init(task: (@escaping (T) -> ()) -> ()) {
+        self.queue = DispatchQueue(label: futurePrivateQueueName)
         task { value in
             self.queue.async {
                 self.value = value
@@ -63,6 +78,17 @@ public final class Future<T>: FutureType {
             }
         }
     }
+    
+    public convenience init(on queue: DispatchQueue, _ value: Value) {
+        self.init(value)
+        self.queue = queue
+    }
+    
+    public convenience init(on queue: DispatchQueue, task: (@escaping (Value) -> ()) -> ()) {
+        self.init(task: task)
+        self.queue = queue
+    }
+
 }
 
 extension FutureType {
