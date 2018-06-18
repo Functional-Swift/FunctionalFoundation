@@ -42,7 +42,7 @@ extension Sequence where Iterator.Element: FutureType {
             let group = DispatchGroup()
             for future in self {
                 group.enter()
-                future.onComplete { v in
+                future.onComplete(on: nil) { v in
                     queue.async {
                         result.append(v)
                         group.leave()

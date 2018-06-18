@@ -22,33 +22,23 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
-
 import Foundation
-
-
-private let futurePrivateQueueName = "Future<T> private queue (FunctionalFoundation)"
 
 public protocol FutureType {
     associatedtype Value
     func onComplete(on queue: DispatchQueue?, execute: @escaping (Value) -> ())
-    func onComplete(execute: @escaping (Value) -> ())
-    init(_ value: Value)
-    init(task: (@escaping (Value) -> ()) -> ())
-    init(on queue: DispatchQueue, _ value: Value)
-    init(on queue: DispatchQueue, task: (@escaping (Value) -> ()) -> ())
+    init(on queue: DispatchQueue?, _ value: Value)
+    init(on queue: DispatchQueue?, task: (@escaping (Value) -> ()) -> ())
 }
 
 public final class Future<T>: FutureType {
+    
     public typealias Value = T
-
-    private var queue : DispatchQueue
+    
+    private let queue : DispatchQueue
     
     private var value: T?
     private var callbacks: [(T) -> ()] = []
-
-    public func onComplete(execute: @escaping (Value) -> ()) {
-        self.onComplete(on: nil, execute: execute)
-    }
     
     public func onComplete(on queue: DispatchQueue? = nil, execute: @escaping (T) -> ()) {
         let dispatchQueue = queue ?? self.queue
@@ -61,15 +51,13 @@ public final class Future<T>: FutureType {
         }
     }
     
-
-    
-    public init(_ value: T) {
-        self.queue = DispatchQueue(label: futurePrivateQueueName)
+    public init(on queue: DispatchQueue? = nil, _ value: T) {
+        self.queue = queue ?? DispatchQueue(label: "Future<T> private queue (FunctionalFoundation)")
         self.value = value
     }
     
-    public init(task: (@escaping (T) -> ()) -> ()) {
-        self.queue = DispatchQueue(label: futurePrivateQueueName)
+    public init(on queue: DispatchQueue? = nil, task: (@escaping (T) -> ()) -> ()) {
+        self.queue = queue ?? DispatchQueue(label: "Future<T> private queue (FunctionalFoundation)")
         task { value in
             self.queue.async {
                 self.value = value
@@ -78,23 +66,12 @@ public final class Future<T>: FutureType {
             }
         }
     }
-    
-    public convenience init(on queue: DispatchQueue, _ value: Value) {
-        self.init(value)
-        self.queue = queue
-    }
-    
-    public convenience init(on queue: DispatchQueue, task: (@escaping (Value) -> ()) -> ()) {
-        self.init(task: task)
-        self.queue = queue
-    }
-
 }
 
 extension FutureType {
     func map<U>(_ transform: @escaping (Value) -> U) -> Future<U> {
         return Future<U> { complete in
-            self.onComplete { t in complete(transform(t)) }
+            self.onComplete(on: nil) { t in complete(transform(t)) }
         }
     }
 }
@@ -102,7 +79,7 @@ extension FutureType {
 extension FutureType {
     public func then<U>(_ execute: @escaping (Value) -> Future<U>) -> Future<U> {
         return Future<U> { complete in
-            self.onComplete { value in
+            self.onComplete(on: nil) { value in
                 execute(value).onComplete(execute: complete)
             }
         }
@@ -112,7 +89,7 @@ extension FutureType {
 extension FutureType {
     public func and<NewValue>(_ future: Future<NewValue>) -> Future<(Value, NewValue)> {
         return Future<(Value, NewValue)> { complete in
-            self.onComplete { (value: Value) in
+            self.onComplete(on: nil) { (value: Value) in
                 future.onComplete { (anotherValue: NewValue) in
                     complete((value, anotherValue))
                 }
@@ -120,7 +97,3 @@ extension FutureType {
         }
     }
 }
-
-
-
-
