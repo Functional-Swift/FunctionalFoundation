@@ -69,7 +69,7 @@ public final class Future<T>: FutureType {
 }
 
 extension FutureType {
-    func map<U>(_ transform: @escaping (Value) -> U) -> Future<U> {
+    public func map<U>(_ transform: @escaping (Value) -> U) -> Future<U> {
         return Future<U> { complete in
             self.onComplete(on: nil) { t in complete(transform(t)) }
         }
