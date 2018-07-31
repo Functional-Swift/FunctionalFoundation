@@ -132,4 +132,13 @@ extension Command {
     }
 }
 
+// MARK: - Codable -
+extension Command: Codable {
+    public convenience init(from decoder: Decoder) throws {
+        self.init { _ in }
+    }
+    
+    public func encode(to encoder: Encoder) throws {}
+}
+
 
